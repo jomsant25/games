@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background: #000;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+  
+  li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  
+  li a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+
+h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px;
+    gap: 30px;
+    background-color: teal;
+
+}
+
+.view {
+    height: 500px;
+    width: 500px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100vh;
+    background: #000;
+    perspective: 800px;
+}
+
+.cards {
+    position: relative;
+    height: calc(100% / 4- 1px);
+    width: calc(100% / 4 - 4px);
+    margin:1px;
+    padding: 1px;
+    display: flex; 
+    transition: 1s;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform: scale(1);
+    transition: transform .5s;
+}
+
+.cards:active {
+    transform: scale(.97);
+    transition: transform .2s;
+}
+
+.cards.flip {
+    transform: rotateY(180deg);
+}
+
+.front-img {
+    padding: 15px 20px;
+    /* z-index: 2; */
+}
+
+.back-img {
+    transform: rotateY(180deg);
+}
+.front-img, 
+.back-img {
+    border-radius: 14px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    background: #cdb7e9;
+} 
+
+.reset-button {
+    display: block;
+    margin: 40px auto;
+    padding: 20px auto;
+    width: 100%;
+    size: 100%;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007BFF; /* Blue background */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
