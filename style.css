@@ -97,3 +97,30 @@ body {
     max-width: 50%;
 }
 
+.coreImg {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: #fef8ec;
+}
+
+.coreImg-content {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+  }
+
+  .coreImg h2 {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+  }

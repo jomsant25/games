@@ -1,12 +1,12 @@
 
 var imageList = [
     "anger",
-    // "anxiety",
-    // "disgust",
-    // "envy",
-    // "fear",
-    // "joy",
-    // "ennui",
+    "anxiety",
+    "disgust",
+    "envy",
+    "fear",
+    "joy",
+    "ennui",
     "sadness"]
 
 let isFlipped = false;
@@ -101,7 +101,7 @@ function unflipCards() {
         cardOne.classList.remove('flip');
         cardTwo.classList.remove('flip');
         resetBoard();
-    }, 500); // Flip back after 1 second
+    }, 500); // Flip back after 0.5 second
 }
 
 function resetBoard() {
@@ -126,8 +126,8 @@ function checkAllFlipped() {
 }
 
 function coreMemoryImage() {
-    document.getElementById("coreMemory").innerHTML = "Core Memory Unlocked!";
-    document.body.style.backgroundImage = "url(assets/img/core-image.jpg)";
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
 }
 
 function playSound(soundPath) {
@@ -139,4 +139,6 @@ window.onload = function() {
     shuffleImages();
     generateImages();
 }
+
+
 
