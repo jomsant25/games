@@ -1,23 +1,21 @@
 
 var imageList = [
     "anger",
-    "anxiety",
-    "disgust",
-    "envy",
-    "fear",
-    "joy",
-    "ennui",
+    // "anxiety",
+    // "disgust",
+    // "envy",
+    // "fear",
+    // "joy",
+    // "ennui",
     "sadness"]
 
 let isFlipped = false;
 let lockBoard = false;
 let cardOne, cardTwo;
 
-const rightSound = new Audio('assets/sounds/correct.wav');  // Correct match sound
-const wrongSound = new Audio('assets/sounds/wrong.wav');
-// preload the sound
-rightSound.load();
-wrongSound.load();
+const rightSound = 'assets/sounds/correct.wav';  // Correct match sound
+// const wrongSound = new Audio('assets/sounds/wrong.wav'); // the sound is annoying
+
 
 // Shuffle using Fisher-Yates Method
 const shuffleImages = () => {
@@ -31,9 +29,9 @@ const shuffleImages = () => {
 /* Create <div class=cards> <div class=card> <img class=card src=list.item> */
 const generateImages = () => {
     List.forEach(item => {
-        let game = document.getElementById("view"); //Game Box
+        let game = document.getElementById("container"); //Game Box
         let  cards = document.createElement("div");   
-        cards.classList.add("cards");  
+        cards.classList.add("box");  
         cards.setAttribute("data-item",item);
 
         let frontImg = document.createElement("img");    
@@ -49,7 +47,7 @@ const generateImages = () => {
         game.appendChild(cards);
     });
 
-    const box = document.querySelectorAll('.cards'); // Select all the class cards
+    const box = document.querySelectorAll('.box'); // Select all the class cards
     box.forEach(boxImage => {
         boxImage.addEventListener('click',flipImage); // Add a click function on each image
     });
@@ -72,7 +70,7 @@ function flipImage() {
     checkMatch();
 }
 
-function disableCards() {
+function disableCards() { // to prevent the user from clicking before the two cards flipped
     cardOne.removeEventListener('click', flipImage);
     cardTwo.removeEventListener('click', flipImage);
 
@@ -85,13 +83,13 @@ function disableCards() {
 
 function checkMatch() {
     if(cardOne.getAttribute('data-item') === cardTwo.getAttribute('data-item')) {
+        playSound(rightSound);
         disableCards();
-        rightSound.play();
     }
     else {
         lockBoard = true;
         setTimeout(() => {
-            wrongSound.play();  
+            // wrongSound.play();  
             unflipCards();     
         }, 300);  
     }  
@@ -103,7 +101,7 @@ function unflipCards() {
         cardOne.classList.remove('flip');
         cardTwo.classList.remove('flip');
         resetBoard();
-    }, 1000); // Flip back after 1 second
+    }, 500); // Flip back after 1 second
 }
 
 function resetBoard() {
@@ -114,17 +112,27 @@ function resetBoard() {
 }
 
 function checkAllFlipped() {
-    const allCards = document.querySelectorAll('.cards');
+    const allCards = document.querySelectorAll('.box');
     const allFlipped = Array.from(allCards).every(card => 
         card.classList.contains('flip') || card.classList.contains('matched')
     );
 
     if (allFlipped) {
+        coreMemoryImage();
         setTimeout(() => {
-            alert("Congratulations! You've matched all the cards!");
-            // resetBoard();
-        }, 500);
+            window.location.reload();
+        }, 5000);
     }
+}
+
+function coreMemoryImage() {
+    document.getElementById("coreMemory").innerHTML = "Core Memory Unlocked!";
+    document.body.style.backgroundImage = "url(assets/img/core-image.jpg)";
+}
+
+function playSound(soundPath) {
+    const sound = new Audio(soundPath);
+    sound.play();
 }
 
 window.onload = function() {
